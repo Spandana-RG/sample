@@ -1,0 +1,53 @@
+<div ng-controller="ToppackController">
+  <!-- Search container -->
+  <div class="container">
+  	<div class="row">
+      <div class="col-md-6 col-lg-offset-3 text-center">
+  		  <h2>Repository Search</h2>
+        <div id="custom-search-input">
+          <div class="input-group col-md-12">
+            <input type="text" class="form-control input-lg" placeholder="Search" ng-model="searchTerm" />
+            <span class="input-group-btn">
+                <button class="btn btn-info btn-lg" type="button" ng-click="searchRepository(searchTerm);">
+                  <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span>
+          </div>
+        </div>
+      </div>
+  	</div>
+  </div>
+
+  <div class="container" ng-if="repositories.length">
+    <hgroup class="mb20">
+      <h2 class="lead"><strong class="text-danger">{{repositories.length}}</strong> results were found for the search for <strong class="text-danger">{{searchTerm}}</strong></h2>
+    </hgroup>
+    <section class="col-xs-12 col-sm-6 col-md-12"  ng-repeat="repository in repositories">
+  		<article class="search-result row">
+  			<div class="col-xs-12 col-sm-12 col-md-3">
+  				<a href="#" title="Lorem ipsum" class="thumbnail"><img ng-src={{repository.avatar_url}} alt="Lorem ipsum" /></a>
+  			</div>
+  			<div class="col-xs-12 col-sm-12 col-md-2">
+  				<ul class="meta-search">
+  					<li><i class="glyphicon glyphicon-calendar"></i> <span>{{repository.updated_at.split('T')[0]}}</span></li>
+  					<li><i class="glyphicon glyphicon-star"></i> <span>{{repository.stargazers_count}}</span></li>
+  					<li><i class="glyphicon glyphicon-tags"></i> <span>{{repository.forks_count}}</span></li>
+            <li><i class="glyphicon glyphicon-time"></i> <span>{{repository.watchers_count}}</span></li>
+  				</ul>
+  			</div>
+  			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+  				<h3><a href="#" title="">{{repository.name}}</a></h3>
+  				<p>    {{repository.description}}</p>
+          <span class="plus"><button type="button" ng-click="importRepository(repository, $index);"><i class="glyphicon glyphicon-import"></i></button></span>
+  			</div>
+  			<span class="clearfix borda"></span>
+  		</article>
+    </section>
+  </div>
+
+  <div ng-if="searchError.length" >
+    {{searchError}}
+  </div>
+
+
+</div>
